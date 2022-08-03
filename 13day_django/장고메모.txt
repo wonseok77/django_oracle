@@ -1,0 +1,430 @@
+<작업 directory만들기>
+	mkdir tutorial
+	web project할때는 폴더를 따로 만든다
+	탐색기에서 만들어도되고 command창에서 만들어도 된다
+
+<작업 directory로 접속>
+	상대주소 한칸앞으로 cd..
+	제일 앞으로 cd /
+	prompt에서 만든 폴더를 cd명령어를 이용해서 접속
+	cd busan20220608
+	그러고 요거 실행
+	conda install -c conda-forge Django
+	done 나오면 설치된거다
+
+<장고 설치 확인>
+	prompt에
+	conda list | findstr django
+	이거 Anaconda prompt에서 실행해서 설치됐는지 확인
+
+<장고 프로젝트 생성>
+	새로운 프로젝트를 생성할때 사용하는 명령어
+	django-admin startproject config .
+	한 칸 띄우고 .의 의미는 현재위치를 의미(상대경로 개념)
+	config는 지정이름인데 환경설정이름이라 현장에서도 그냥 config를 사용한다.
+	프로젝트이름이 아니기 때문
+	manage.py라는 파일을 생성확인(절대 삭제하거나 수정하면 안된다 주의 얘가 프로젝트 전체 실행파일)
+
+<editor>
+	그다음에 VS code에서 코딩을 진행 
+	쥬피터는 분석할때만 씀
+	프로그램만들때는 프로그램 editor를 써야함
+	여러가지있는데 파이참이나 이런거 있는데 VScode를 많이쓴다
+
+	prompt에
+	code . 실행 현재 위치에서 vscode를 열어라라는 의미
+ 
+<<웹서버를 구동할대 사용하는 명령어 : 엄청 많이 쓰니까 잘 봐두자 >>
+	prompt에 써라
+	python manage.py server 
+	python manage.py runserver
+	실행하면 나오는 http://127.0.0.1:8000/ 이게 실제 웹서버 주소다
+	드래그 마우스 오른쪽 클릭하면 복사된다 (컨트롤씨 안댐)
+	컨트롤씨는 서버 구동을 중지하는 명령어! (Ctrl + C : stop)
+	http://127.0.0.1:8000/ 얘를 url로 크롬브라우저주소창에 입력해서 로켓 나오면 잘된거
+
+<DataBase>
+	폴더에 가보면 자동으로 db가 생김 (SQLite)
+	파일 db방식으로 구동되는 database <- json
+
+<app>
+	프로그램을 할려면 app이라는걸 만드는데 이거를 prompt에서 실행한다
+	django-admin startapp testapp
+	VScode에 testapp이라는 폴더가 만들어졌는지 확인한다
+	testapp에서 back front end처리를 한다
+
+<config>
+	에서 건드려야될꺼 딱 2개
+	setings.py 서버에 관련된 환경설정은 다 여기서 한다 (DB도 서버 : 연결, 접속정보, URL)
+	urls.py는 url을 받았을 때 어떤 페이지를 보여줘야될지 연결 즉, 웹 브라우저에서 url을 받아내서 처리하는것
+	
+<app내부 구성>
+	views.py 가장많이쓴다
+	models.py 데이터베이스를 처리하는쪽
+	urls.py
+	py로 되어있는것은 다 백엔드 프로그램
+	html은 testapp 아무데나 나중에 넣으면 된다
+
+<가상환경>
+	가상환경 목록 보기
+	conda env list
+
+	django 가상환경 만들기(이건 django가 가상환경 이름인데 바꿀수있다)
+	conda create --name django
+
+	생성한 django 가상환경으로 활성화하기(가상환경으로 진입)
+	conda activate django
+	앞으로 vs code는 django 가상환경에서 Open
+
+<실습>
+	가상환경에서 강의에 사용할 작업폴더, Django
+	작업폴더명 : tutorial
+	Project 명 : config
+	App 명 : firstapp
+	
+<가상환경에 환경설치하기>	
+	가상환경에서 django 설치
+	conda install -c conda-forge django==4.0.1
+	==은 버전을 낮춰서 설치할때 사용하는 명령어 형식
+
+	django 버전 확인
+	django-admin --version
+
+	설치 확인
+	conda list
+	pip list
+
+	%%django 가상환경에서 설치 (base)에 설치하면 충돌난다%%
+	아래 명령으로 라이브러리 설치
+	주피터 노트북 설치 : pip install jupyter notebook
+	가상환경에 커널 연결하기 python -m ipykernel install --user --name django --display-name django_kernel
+	(django 커널에 연결하면 django 가상환경을 사용하겠다는 명령어)
+	(django라는 가상환경에 django kernel을 만들어라)
+	참고로, 커널제거 명령은 jupyter kernelspec uninstall 가상환경명을 사용
+
+	기본 설치 라이브러리(1) : pip install ipython jupyter matplotlib pandas sklearn xlrd seaborn
+	기본 설치 라이브러리(2) : pip install openpyxl
+
+	웹 서버(Web server) 실행해 보기
+	python manage.py runserver
+
+
+<실습>
+	--base에서
+	가상환경 빠져나오기(base로 나오기) : conda deactivate
+	가상환경 이름 : django2
+	커널이름 : django2-kernel
+	주피터 노트북에서 확인한다
+	라이브러리 모두 설치
+
+	<django2 설치 이후 아래 실행>
+	작업폴더 : tutorial_test
+	프로젝트명 : config
+	서버 시작_테스트
+	app명 : test1
+	서버 시작...테스트
+
+
+
+
+<visual studio Code>
+	VS code 확장 프로그램 설치
+	python 설치
+	python for VSCode 설치
+	python extension Pack
+	Python Indent
+	Python Extended
+	Pylance
+
+	django
+	django tmeplate
+	django snippets
+
+	vscode-icons
+	indent-rainbow
+	bracket Pair Colorizer 2
+
+<settings>
+	settings.py <- 서버 설정을 건드리는것
+	ALLOWED_HOSTS = ['127.0.0.1']
+
+	앱 만들때마다 제일 위에 등록해줘야함 (리스트안에 삽입)
+	INSTALLED_APPS = [
+		'firstapp',
+		.....]
+	
+	TEMPLATES(front end 프로그램이 들어가는 곳)
+	DIRS : [BASE_DIR / 'templates']
+		
+	firstapp에다가 DIR을 연결시킬껀데
+	html, css, javascript 등등을 자동으로 연결해서 해석할수있게할거다
+
+	DATABASES는 오라클 설정 나중에 해줄거다
+	기본설정은 SQLite3
+	BASE_DIR은 누굴까요 ? 현재작업디렉토리가 BASE다
+
+	Language_code
+
+	한글설정, 표준시간 셋팅
+	# update........
+	# LANGUAGE_CODE = 'en-us'
+	LANGUAGE_CODE = 'ko-kr'
+
+	# TIME_ZONE = 'UTC'
+	TIME_ZONE = 'Asia/Seoul'
+
+
+
+=================================================================
+2days
+<환경구축하다가 잘못되었을경우(이름실수나 이런거)>
+	makemigrations app : app의 모델 변경사항 확인
+	migrate : 변경사항을 데이터베이스로 반영
+
+<연습>
+	1. 어제 만든 tutorial 작업 폴더 삭제
+	2. 작업폴더 tutorial 만들기
+	3. config 프로젝트 만들기(웹서버 구동 테스트)
+	4. first app 만들기
+	5. settings.py 웹서버 환경설정
+	6. 웹서버 최종확인
+
+<front 관련 지식>
+	웹브라우저에 이미지를 static이라고 한다(STATIC_URL)
+	동적인 front javascript
+	정적인 front html, css, bootstrap
+	.py에서 작업하는 모든것은 백앤드
+
+<app 설정> firtstapp>view.py
+	from django.shortcuts import render
+	from django.http import HttpResponse
+
+	def index1(request) :
+		return HttpResponse("<u>Hello...</u>")
+		
+	-> index1을 요청하면 response로 대답하는 함수
+
+<project config 설정> config>urls.py
+	from firstapp import views 추가
+	
+	urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('index1/', views.index1)
+	]
+	
+	이런 url에 들어오면 index1 함수를 사용해라
+	서버 실행해보고 http://127.0.0.1:8000/index1/
+	을 브라우저 url에 입력해서 Hello... 출력되는지 확인하기
+
+<프로그램하는 순서>
+	url과 함수를 맞춘다 : url mapping
+	1. app -> views.py에 함수 만들기
+	2. config -> urls.py에 url생성 및 함수 매핑
+	3. 서버 실행 -> url입력
+
+	cd tutorial
+	django-admin startproject config .
+	django-admin startapp firstapp
+
+	urlpatterns ???
+
+<django 구조>
+	MTV 패턴 (Model, Template, View)
+		-Template : 클라이언트에게 보여줄 UI (HTML, CSS, JavaScript) 최전방
+		-View : Controller 역할, 요청을 받은 후 [모델을 실행한 후] 응답 중앙
+		-Model : 데이터 처리(DB의 테이블) 뒷라인
+		
+		실행순서 : V M T 순서
+	
+		- DEBUG : 개발 시 필요한 메시지 (오류 등) 확인
+		- ALLOWED_HOSTS : 서버로 접속 가능한 URL지정
+			default : 'localhost' 또는 '127.0.0.1'
+			deploy : '0.0.0.0' 또는 서비스 제안
+	
+<실습>
+	index2 url 만들기
+	index2 함수 만들기
+	응답 데이터는 <p>index2 함수를 호출했습니다.</>
+
+<url app별로 분산 (config에서)>
+	VS 코드에서 복붙 config -> first app
+	주석이랑 admin include 삭제
+
+<실습>
+	127.0.0.1:8000/home/ 주소 생성
+	tutorial/config/urls.py 파일 사용
+	tutorial/firstapp/views.py 파일 사용
+	
+<실습2> secondapp 앱 생성하기
+	127.0.0.1:8000/second/main 주소 생성
+	tutorial/secondapp/urls.py 파일 사용
+	tutorial/secondapp/views.py 파일 사용
+	
+<config>
+	config 웹 환경설정 역할
+	config를 삭제하면? startproj에서 만들면 된다
+
+<client>
+	user가 요청하면 server에서 응답
+	우리꺼야 하고 받아주는게 settings.py
+	요청통로 url.py + url들어오는거 app으로 넘겨라
+<app>
+	서버에서 처리해주는 프로그램이 app
+	생성하는 명령어가 startapp
+	최초에 한번만 만들면 되는게 startapp
+	view, model, urls.py 를 사용
+	
+<웹서버 진행 순서>
+	1.웹브라우저 : URL 입력 > 엔터 > 웹서버에 요청
+	2.config > settings.py에서 도메인 확인
+	3.config > urls.py에서 페이지분리 > app으로 나머지 뒤에 url전달
+	4.app > urls.py에서 url 받기 > view.py 함수 호출
+	5.app > view.py에서 함수 실행
+		  > model.py 데이터 처리 > views.py에 전달
+		  > views.py에서 html 호출 > html에 데이터 담기
+	6. 웹브라우저로 html 전달(return)	
+	
+	프로그래밍할때는 순서 views.py 함수 만들기 > urls mapping > html > model
+	
+	settings.py에는 INSTALLED_APPS 하나만 변한다 (끝에 ,로 끝나는 규칙 기억)
+	sqlite는 웹서버 실행하면 만들어진다
+	allowed_host에 내 IP주소를 넣으면 다른컴터에서 접근가능
+	> urls.py에서 뒤에 나머지부분을 app으로 넘김
+	include라는것은 포함한다는 개념인데 include안에서 정의된 secondapp의 파일이 있다
+	라이브러리 안에 함수(모듈)이있는데 secondapp이라는 패키지안에 urls라는 모듈이 있다
+	= secondapp이라는 폴더에 urls.py라는 함수를 가져와라
+	secondapp에 있는 urls.py에있는 모든 소스를 가져와라(포함시켜놔라 메모리에 한 세트로 합침)
+	실제로는 config.urls.py에서 secondapp.urls.py가 실행되고있는것임
+	urls mapping을 하게되면 from secondapp import views 이건 일반적으로 사라진다
+	include하지않고 직접 써줄려면 from import 해야한다 > 이렇게 쓰다보면 오류가 난다
+	왜 오류가 날까? 문법적인 오류가 있다 import views라는 이름이 똑같다
+	어떻게든 쓸려면 alias를 무조건 써줘야 한다
+	ex)	from firstapp import views as fv
+		from secondapp import views as sv
+	
+	firstapp urls 파일과 파일을 연결할때 사용하는게 import
+	불러들일 파일의 위치를 지정하는것이 from
+	from . import views.py가 필요한 이유
+		firstapp내의 views와 urls.py를 연결하기위해서
+		url과 함수를 매핑시키기위해서
+	
+	html > hyper text ~
+
+<실습>
+	1. 작업디렉토기만들기 : testproj
+	2. 프로젝트 만들기 : config
+	3. app 만들기 : testapp
+	4. 요청 URL : http://127.0.0.1:8000/test/index1
+	5. testapp에서 index1 url에 대한 함수 호출하여
+	아래 내용 응답해주기
+	"안녕하세요~ 오늘은 비가 옵니다."
+	
+	커널은 뭐하는거지 ?
+	
+	
+	models.py -> DB(SQLite) Class 기반으로 만든다
+	
+	모델을 건드렸다싶으면 두가지 set를 실행하기
+		manage프로젝트 실행 파일이 모델 인식하게 하기
+		python manage.py makemigrations [app이름]
+		
+		모든 app의 수정사항 정리 후 DB에 반영
+		python manage.py migrate
+	
+<실습>
+	secondapp에 Course 모델 생성하기
+		요구사항 1) Course 모델 클래스 작성
+		요구사항 2) name (charField-최대길이(30),
+				  cnt (integerField())
+		
+	secondapp의 Course 모델을 사용하여 데이터 입력하기
+		요구사항 1) : 127.0.0.1:8000/second/insert/주소생성
+		요구사항 2) : 1)의 주소로 접속할 때 아래와 같이 4개의 데이터 입력
+		
+
+firstapp안에 새폴더 templates\firstapp
+안에 코드파일만들기 show2.html
+views.py에
+	from django.shortcuts import render
+	def show2(request):
+		return render(
+        request,
+        "firstapp/show2.html",
+        {}
+        )
+request로 받은 값을 html로 넘기기도함
+{}은 DB에서 받은값을 html로 넘김
+
+{{}} html에서 코드값만 불러올때
+{%%} html내에서 파이썬 코딩할때
+
+django
+	ORM (Object) 객체 방식 - 기본적인 방식(SQLITE 쓸때는)
+	
+	개발업체에서는 DB query문을 많이 쓴다 - Oracle insert같은경우 이걸로만 가능
+	객체못만든다
+	
+pip install cx_Oracle
+html <td> 행방향 ㅋ_ㅋ
+
+저장할때는 set가져올때는 get 보여주는건 view
+
+근데 context를 썼는데 html에서는 여전히 df를 쓰는지
+
+
+<dbapp 생성>
+1. model_pandas > cart.py 생성 후 DB 처리 함수 생성
+ - getCartList() : 전체조회
+ - getCart() : 한건조회
+ 
+2.view
+ - View_Cart_List() : 전체조회
+ - View_Cart : 한건조회
+ 
+3.html
+-cart 폴더 생성
+ --> cart_list.html : 전체조회
+ --> cart.html : 한건조회
+ 
+ 
+딕셔너리 형태로 html에 올리는 이유는
+html이 국제규약에 그렇게 만들어져 있기 때문이다
+
+json 전체는 list 그 안에 dic 또는 dic
+
+
+<실습>
+secondapp에서...
+
+1. model_panda 폴더 생성
+-lprod.py 파일 생성 : getLprodList(), getLprod() 함수 생성
+[model이랑 view연결은 model의 함수를 모듈을 import해서 가져온다]
+2. view.py
+- view_Lprod_list() 함수 생성
+- view_Lprod() 함수 생성
+[view랑 template은 render라는 함수로 연결]
+[view랑 urls는 views.함수로 연결]
+
+3. templates / html
+- lprod_list.html 생성
+- lprod.html 생성
+  (한건 조회하기 위한 조건값은 PK값 임의로 선택)
+
+4. lprod_list에서
+- 상품분류명 클릭하면 lprod.html로 링크 처리
+
+코딩순서 MVT
+
+parameter 구글 검색어작성후 serch하면 검색어가 server로 날라가는 그런거
+링크로 요청을 하면 view가 가장 먼저 호출된다
+
+get방식 url?뒤에 써주는 방식
+post url에 아무것도 없는데 전달이 되는방식
+
+PK2개일때 하이퍼링크 &를 활용해서 html에 걸어주기
+
+settings.py APPEND_SLASH = False
+{% csrf_tokken %}
+
+# 페이지처리 라이브러리
+from django.core.paginator import Paginator

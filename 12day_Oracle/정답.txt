@@ -1,0 +1,14 @@
+<<1번정답>>
+select substr(prod_name,1,2) as 성별제품,
+       round(avg(to_date(cast(substr(cart_no,1,8) as date), 'YYYY.MM.DD') - to_date(cast(buy_date as date), 'YYYY.MM.DD')),2) as 소매점대기시간
+       
+from cart, buyprod, (select prod_name,prod_id 
+                     from prod
+                     where prod_name like '남성%' 
+                     or prod_name like '여성%')
+where  
+    to_date(cast(substr(cart_no,1,8) as date), 'YYYY.MM.DD') - to_date(cast(buy_date as date), 'YYYY.MM.DD') > 0 
+    and cart_prod = prod_id
+    and prod_id = buy_prod
+    
+group by substr(prod_name,1,2);
