@@ -1,1 +1,1 @@
-# kdigital_django_oracle
+# django_oracle
